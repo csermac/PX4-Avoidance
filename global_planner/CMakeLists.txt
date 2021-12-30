@@ -4,6 +4,9 @@ project(global_planner)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# export file for clangd during compilation
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
