@@ -2,9 +2,9 @@
 <launch>
     <arg name="pointcloud_topics" default="[/camera/depth/points]"/>
     <arg name="camera_frame_id" default="camera_link"/>
-    <arg name="start_pos_x" default="0.5" />
-    <arg name="start_pos_y" default="0.5" />
-    <arg name="start_pos_z" default="3.5" />
+    <arg name="start_pos_x" default="1.5" />
+    <arg name="start_pos_y" default="1.5" />
+    <arg name="start_pos_z" default="0.1" />
     <arg name="world_file_name"    default="simple_obstacle" />
     <arg name="frame_id"    default="local_origin" />
 
@@ -24,7 +24,7 @@
 
     <!-- OctoMap Server -->
     <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
-        <param name="resolution" value="1.0" />
+        <param name="resolution" value="2.0" />
         <!-- fixed map frame (set to 'map' if SLAM or localization running!) -->
         <param name="frame_id" type="string" value="$(arg frame_id)" />
         <!-- maximum range to integrate (speedup!) -->
