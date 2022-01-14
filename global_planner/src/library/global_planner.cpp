@@ -489,6 +489,9 @@ bool GlobalPlanner::getGlobalPath() {
   if (goal_must_be_free_ && getRisk(t) > max_cell_risk_) {
     // If goal is occupied, no path is published
     ROS_INFO("Goal position is occupied");
+	// goal_must_be_free_  is set in the header but also in the callback for parameters
+	// so setting it to false ther doen'nt serve the purpose since it gets changed by the
+	// callback for rqt_reconfigure anyway
     goal_is_blocked_ = true;
     return false;
   } else if (current_cell_blocked_) {
