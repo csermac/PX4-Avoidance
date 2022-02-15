@@ -5,7 +5,7 @@
     <arg name="start_pos_x" default="1.5" />
     <arg name="start_pos_y" default="1.5" />
     <arg name="start_pos_z" default="0.1" />
-    <arg name="world_file_name"    default="simple_obstacle" />
+    <arg name="world_file_name"    default="outdoor_village" />
     <arg name="frame_id"    default="local_origin" />
 
 
@@ -17,9 +17,9 @@
         <param name="start_pos_x" value="$(arg start_pos_x)" />
         <param name="start_pos_y" value="$(arg start_pos_y)" />
         <param name="start_pos_z" value="$(arg start_pos_z)" />
-        <param name="world_name" value="$(find avoidance)/sim/worlds/$(arg world_file_name).yaml" />
+        <param name="world_name" value="/home/csermac/.gazebo/worlds/$(arg world_file_name).world" />
         <rosparam param="pointcloud_topics" subst_value="True">$(arg pointcloud_topics)</rosparam>
-        <param name="robot_radius" value="0.5" /> 
+        <param name="robot_radius" value="0.3" /> 
     </node>
 
     <!-- OctoMap Server -->
