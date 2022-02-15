@@ -24,7 +24,7 @@
 
     <!-- OctoMap Server -->
     <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
-        <param name="resolution" value="2.0" />
+        <param name="resolution" value="0.1" />
         <!-- fixed map frame (set to 'map' if SLAM or localization running!) -->
         <param name="frame_id" type="string" value="$(arg frame_id)" />
         <!-- maximum range to integrate (speedup!) -->
@@ -37,8 +37,8 @@
         <param name="color/g" value="0.1" />
         <param name="color/b" value="0.1" />
         <param name="color/a" value="1.0" />
-        <!-- Filter out obstacles which are lower than 1 meter -->
-        <param name="occupancy_min_z" value="1.0" />
+        <!-- Filter out obstacles which are lower than 0.5 meter -->
+        <param name="occupancy_min_z" value="0.5" />
         <param name="height_map" value="false" />
         <param name="publish_free_space" value="false" />
         <!-- data source to integrate (PointCloud2) -->
