@@ -61,17 +61,17 @@ class GlobalPlanner {
   geometry_msgs::Point curr_pos_;
   double curr_yaw_;
   geometry_msgs::Vector3 curr_vel_;
-  GoalCell goal_pos_ = GoalCell(0.5, 0.5, 3.5);
+  GoalCell goal_pos_ = GoalCell(0.5, 0.5, 1.5);
   bool going_back_ = true;  // we start by just finding the start position
 
   // Dynamic reconfigure parameters
-  int min_altitude_ = 1;
+  int min_altitude_ = 0.5;
   int max_altitude_ = 10;
-  double max_cell_risk_ = 0.2;
+  double max_cell_risk_ = 0.8;
   double smooth_factor_ = 10.0;
   double vert_to_hor_cost_ = 1.0;  // The cost of changing between vertical and
                                    // horizontal motion (TODO: use it)
-  double risk_factor_ = 500.0;
+  double risk_factor_ = 800.0;
   double neighbor_risk_flow_ = 1.0;
   double explore_penalty_ = 0.005;
   double up_cost_ = 3.0;
@@ -80,13 +80,13 @@ class GlobalPlanner {
   double min_overestimate_factor_ = 1.03;
   double max_overestimate_factor_ = 2.0;
   double risk_threshold_risk_based_speedup_ = 0.5;
-  double default_speed_ = 1.0;  // Default speed of flight.
-  double max_speed_ = 3.0;      // Maximum speed of flight.
-  int max_iterations_ = 2000;
+  double default_speed_ = 2.5;  // Default speed of flight.
+  double max_speed_ = 5.0;      // Maximum speed of flight.
+  int max_iterations_ = 4000;
   bool goal_is_blocked_ = false;
   bool current_cell_blocked_ = false;
-  bool goal_must_be_free_ = true;  // If false, the planner may try to find a path close to the goal
-  bool use_current_yaw_ = true;    // The current orientation is factored into the smoothness
+  bool goal_must_be_free_ = false;  // If false, the planner may try to find a path close to the goal
+  bool use_current_yaw_ = false;    // The current orientation is factored into the smoothness
   bool use_risk_heuristics_ = true;
   bool use_speedup_heuristics_ = true;
   bool use_risk_based_speedup_ = true;
