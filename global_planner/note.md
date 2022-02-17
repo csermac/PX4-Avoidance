@@ -5,3 +5,5 @@
 - If the parameter `clicked_goal_alt_` is lower than the initial vertical position, specified in `global_planner_depth_camera.launch`, then the planner complains a lot.
 
 - Tweaking too much with the resolution parameter in `global_planner_octomap.launch` and setting it too low might create problems as the planner computes a cell z pose that is a saturated variable basically. The companion parameter to this is `CELL_SCALE` in the aforementioned `.cfg` file. The value of the latter should a multiple of the resulution of octomap.
+
+- The failure of the methiod `octomap::search` is caused by  the combianation of the resolution and the `robot_radius`, referred to as `radius` in `global_planner.cpp`, since there is a division between these two parameters in `double GlobalPlanner::getRisk(const Cell& cell)`. This operation is probably the cause of the saturation to the max of an 32-bit integer of `neighbor.zPos()`. The cause is in the division or the start of the cycle for.
