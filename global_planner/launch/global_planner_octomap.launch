@@ -19,7 +19,7 @@
         <param name="start_pos_z" value="$(arg start_pos_z)" />
         <param name="world_name" value="/home/csermac/.gazebo/worlds/$(arg world_file_name).world" />
         <rosparam param="pointcloud_topics" subst_value="True">$(arg pointcloud_topics)</rosparam>
-        <param name="robot_radius" value="0.3" /> 
+        <param name="robot_radius" value="0.2" /> 
     </node>
 
     <!-- OctoMap Server -->
