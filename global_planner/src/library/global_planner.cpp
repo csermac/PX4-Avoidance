@@ -137,6 +137,10 @@ double GlobalPlanner::getSingleCellRisk(const Cell& cell) {
   }
   // octomap::OcTreeNode* node = octree_->search(cell.xPos(), cell.yPos(),
   // cell.zPos());
+  if(cell.zPos() > 2000) {
+  	std::cout  << "z size of cell in getSingleCellRisk: " << cell.zPos() << std::endl;
+  }
+
   int octree_depth = std::min(16, 17 - int(CELL_SCALE + 0.1));
   octomap::OcTreeNode* node = octree_->search(cell.xPos(), cell.yPos(), cell.zPos(), octree_depth);
   if (node) {
@@ -175,8 +179,10 @@ double GlobalPlanner::getAltPrior(const Cell& cell) {
 
 bool GlobalPlanner::isOccupied(const Cell& cell) { 
 	// manually added print for "debugging"
-	std::cout  << "z size of cell in isOccupied: " << cell.zPos() << std::endl;
-	return getSingleCellRisk(cell) > 0.5; 
+  if(cell.zPos() > 2000) {
+  	std::cout  << "z size of cell in isOccupied: " << cell.zPos() << std::endl;
+  }
+  return getSingleCellRisk(cell) > 0.5; 
 }
 
 bool GlobalPlanner::isLegal(const Node& node) {
@@ -189,12 +195,21 @@ double GlobalPlanner::getRisk(const Cell& cell) {
   }
 
   // manually added print for "debugging"
-  std::cout  << "z size of cell in getRisk: " << cell.zPos() << std::endl;
+  if(cell.zPos() > 2000) {
+  	std::cout  << "z size of cell in getRisk: " << cell.zPos() << std::endl;
+  }
 
   double risk = getSingleCellRisk(cell);
+
   int radius = static_cast<int>(std::ceil(robot_radius_ / octree_resolution_));
+  std::cout << "about to enter neighbor for cycle" << std::endl;
+
   for (const Cell& neighbor : cell.getFlowNeighbors(radius)) {
+    if(neighbor.zPos() > 2000) {
+    	std::cout  << "z size of neighbor cell in getRisk inner cycle as just assigned: " << neighbor.zPos() << std::endl;
+    }
     risk += neighbor_risk_flow_ * getSingleCellRisk(neighbor);
+	// std::cout << "risk is: " << risk << std::endl;
   }
 
   risk_cache_[cell] = risk;
