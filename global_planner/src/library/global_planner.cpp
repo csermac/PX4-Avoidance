@@ -1,4 +1,5 @@
 #include "global_planner/global_planner.h"
+#include <iostream>
 
 namespace global_planner {
 
@@ -172,7 +173,11 @@ double GlobalPlanner::getAltPrior(const Cell& cell) {
   }
 }
 
-bool GlobalPlanner::isOccupied(const Cell& cell) { return getSingleCellRisk(cell) > 0.5; }
+bool GlobalPlanner::isOccupied(const Cell& cell) { 
+	// manually added print for "debugging"
+	std::cout  << "z size of cell in isOccupied: " << cell.zPos() << std::endl;
+	return getSingleCellRisk(cell) > 0.5; 
+}
 
 bool GlobalPlanner::isLegal(const Node& node) {
   return node.cell_.zPos() < max_altitude_ && getRisk(node) < max_cell_risk_;
@@ -182,6 +187,9 @@ double GlobalPlanner::getRisk(const Cell& cell) {
   if (risk_cache_.find(cell) != risk_cache_.end()) {
     return risk_cache_[cell];
   }
+
+  // manually added print for "debugging"
+  std::cout  << "z size of cell in getRisk: " << cell.zPos() << std::endl;
 
   double risk = getSingleCellRisk(cell);
   int radius = static_cast<int>(std::ceil(robot_radius_ / octree_resolution_));
