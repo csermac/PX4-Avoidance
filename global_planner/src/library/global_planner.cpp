@@ -202,7 +202,7 @@ double GlobalPlanner::getRisk(const Cell& cell) {
   double risk = getSingleCellRisk(cell);
 
   int radius = static_cast<int>(std::ceil(robot_radius_ / octree_resolution_));
-  std::cout << "about to enter neighbor for cycle" << std::endl;
+  // std::cout << "about to enter neighbor for cycle" << std::endl;
 
   for (const Cell& neighbor : cell.getFlowNeighbors(radius)) {
     if(neighbor.zPos() > 2000) {
