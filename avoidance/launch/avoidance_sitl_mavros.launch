@@ -9,7 +9,7 @@
     <arg name="gcs_url" default="" />   <!-- GCS link is provided by SITL -->
     <arg name="tgt_system" default="1" />
     <arg name="tgt_component" default="1" />
-    <arg name="vehicle" default="iris_obs_avoid"/>
+    <arg name="vehicle" default="iris_avoid_vision_pose"/>
 
     <param name="use_sim_time" value="true" />
 

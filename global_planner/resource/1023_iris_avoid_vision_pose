@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# @name 3DR Iris Quadrotor SITL (Obstacle Avoidance and vision fusion)
+#
+# @type Quadrotor Wide
+#
+
+. ${R}etc/init.d-posix/airframes/10016_iris
+
+param set-default COM_OBS_AVOID 1
+param set-default MPC_XY_CRUISE 5.0
+
+# EKF2: Vision position and heading
+param set-default EKF2_AID_MASK 88
+param set-default EKF2_EV_DELAY 5
