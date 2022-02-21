@@ -55,14 +55,15 @@ class RepubMav():
 
         self.output.header = from_vslam.header
 
+        # conversion from https://docs.px4.io/master/en/ros/external_position_estimation.html#reference-frames
         self.output.pose.position.x = from_vslam.pose.pose.position.x
         self.output.pose.position.y = from_vslam.pose.pose.position.z
-        self.output.pose.position.z = from_vslam.pose.pose.position.y
+        self.output.pose.position.z = -from_vslam.pose.pose.position.y
 
-        self.output.pose.orientation.x = -from_vslam.pose.pose.orientation.x
-        self.output.pose.orientation.y = -from_vslam.pose.pose.orientation.z
+        self.output.pose.orientation.x = from_vslam.pose.pose.orientation.x
+        self.output.pose.orientation.y = from_vslam.pose.pose.orientation.z
         self.output.pose.orientation.z = -from_vslam.pose.pose.orientation.y
-        self.output.pose.orientation.w = -from_vslam.pose.pose.orientation.w
+        self.output.pose.orientation.w = from_vslam.pose.pose.orientation.w
 
 
 if __name__ == "__main__":
