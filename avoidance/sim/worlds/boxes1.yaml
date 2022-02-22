@@ -1,6 +1,6 @@
  - type: "cube"
    name: "box"
-   frame_id: "local_origin"
+   frame_id: "map"
    mesh_resource: ""
    position: [15, 0.0, 2.5]
    orientation: [0.0, 0.0, 0.0, 1.0]

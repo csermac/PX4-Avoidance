@@ -132,7 +132,7 @@ void WaypointGeneratorNode::publishTrajectorySetpoints(const Eigen::Vector3f &po
                                                        float yaw_sp, float yaw_speed_sp) {
   mavros_msgs::Trajectory setpoint;
   setpoint.header.stamp = ros::Time::now();
-  setpoint.header.frame_id = "local_origin";
+  setpoint.header.frame_id = "map";
   setpoint.type = 0;  // MAV_TRAJECTORY_REPRESENTATION::WAYPOINTS
   setpoint.point_1.position.x = pos_sp.x();
   setpoint.point_1.position.y = pos_sp.y();
@@ -185,7 +185,7 @@ void WaypointGeneratorNode::landingAreaVisualization() {
 
   float cell_size = waypointGenerator_.grid_slp_.getCellSize();
   visualization_msgs::Marker cell;
-  cell.header.frame_id = "local_origin";
+  cell.header.frame_id = "map";
   cell.header.stamp = ros::Time::now();
   cell.id = 0;
   cell.type = visualization_msgs::Marker::CUBE;
@@ -239,7 +239,7 @@ void WaypointGeneratorNode::landingAreaVisualization() {
 void WaypointGeneratorNode::goalVisualization() {
   visualization_msgs::Marker m;
   static int id = 0;
-  m.header.frame_id = "local_origin";
+  m.header.frame_id = "map";
   m.header.stamp = ros::Time::now();
   m.type = visualization_msgs::Marker::SPHERE;
   m.action = visualization_msgs::Marker::ADD;

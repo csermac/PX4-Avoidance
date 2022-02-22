@@ -78,7 +78,7 @@ void GlobalPlannerNode::readParams() {
 	nh_.param<double>("start_pos_x", start_pos_.x, 0.5);
 	nh_.param<double>("start_pos_y", start_pos_.y, 0.5);
 	nh_.param<double>("start_pos_z", start_pos_.z, 3.5);
-	nh_.param<std::string>("frame_id", frame_id_, "/local_origin");
+	nh_.param<std::string>("frame_id", frame_id_, "/map");
 	nh_.getParam("pointcloud_topics", camera_topics);
 	if (!nh_.hasParam("camera_frame_id")) {
 		nh_.setParam("camera_frame_id", "/camera_link");

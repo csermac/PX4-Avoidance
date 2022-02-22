@@ -424,7 +424,7 @@ void LocalPlannerNodelet::pointCloudCallback(const sensor_msgs::PointCloud2::Con
     std::lock_guard<std::mutex> tf_list_guard(buffered_transforms_mutex_);
     std::pair<std::string, std::string> transform_frames;
     transform_frames.first = msg->header.frame_id;
-    transform_frames.second = "/local_origin";
+    transform_frames.second = "/map";
     buffered_transforms_.push_back(transform_frames);
     transform_frames.second = "/fcu";
     buffered_transforms_.push_back(transform_frames);
@@ -502,7 +502,7 @@ void LocalPlannerNodelet::pointCloudTransformThread(int index) {
         tf::StampedTransform cloud_transform;
         tf::StampedTransform fcu_transform;
 
-        if (tf_buffer_.getTransform(cameras_[index].untransformed_cloud_.header.frame_id, "/local_origin",
+        if (tf_buffer_.getTransform(cameras_[index].untransformed_cloud_.header.frame_id, "/map",
                                     pcl_conversions::fromPCL(cameras_[index].untransformed_cloud_.header.stamp),
                                     cloud_transform) &&
             tf_buffer_.getTransform(cameras_[index].untransformed_cloud_.header.frame_id, "/fcu",
@@ -515,10 +515,10 @@ void LocalPlannerNodelet::pointCloudTransformThread(int index) {
           pcl_ros::transformPointCloud(maxima, maxima, fcu_transform);
           updateFOVFromMaxima(cameras_[index].fov_fcu_frame_, maxima);
 
-          // transform cloud to /local_origin frame
+          // transform cloud to /map frame
           pcl_ros::transformPointCloud(cameras_[index].untransformed_cloud_, cameras_[index].transformed_cloud_,
                                        cloud_transform);
-          cameras_[index].transformed_cloud_.header.frame_id = "/local_origin";
+          cameras_[index].transformed_cloud_.header.frame_id = "/map";
           cameras_[index].transformed_cloud_.header.stamp = cameras_[index].untransformed_cloud_.header.stamp;
 
           cameras_[index].transformed_ = true;

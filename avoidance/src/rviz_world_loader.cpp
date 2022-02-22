@@ -128,7 +128,7 @@ int WorldVisualizer::visualizeRVIZWorld(const std::string& world_path) {
 
 int WorldVisualizer::visualizeDrone(const geometry_msgs::PoseStamped& pose) {
   visualization_msgs::Marker drone;
-  drone.header.frame_id = "local_origin";
+  drone.header.frame_id = "map";
   drone.header.stamp = ros::Time::now();
   drone.type = visualization_msgs::Marker::MESH_RESOURCE;
   drone.mesh_resource = "model://matrice_100/meshes/Matrice_100.dae";

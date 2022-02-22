@@ -150,7 +150,7 @@ void LocalPlanner::determineStrategy() {
 void LocalPlanner::updateObstacleDistanceMsg(Histogram hist) {
   sensor_msgs::LaserScan msg = {};
   msg.header.stamp = ros::Time::now();
-  msg.header.frame_id = "local_origin";
+  msg.header.frame_id = "map";
   msg.angle_increment = static_cast<double>(ALPHA_RES) * M_PI / 180.0;
   msg.range_min = min_sensor_range_;
   msg.range_max = max_sensor_range_;
@@ -175,7 +175,7 @@ void LocalPlanner::updateObstacleDistanceMsg(Histogram hist) {
 void LocalPlanner::updateObstacleDistanceMsg() {
   sensor_msgs::LaserScan msg = {};
   msg.header.stamp = ros::Time::now();
-  msg.header.frame_id = "local_origin";
+  msg.header.frame_id = "map";
   msg.angle_increment = static_cast<double>(ALPHA_RES) * M_PI / 180.0;
   msg.range_min = min_sensor_range_;
   msg.range_max = max_sensor_range_;

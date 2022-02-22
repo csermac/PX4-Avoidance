@@ -47,7 +47,7 @@ global_position:
   rot_covariance: 99999.0   # covariance for attitude?
   tf:
     send: false               # send TF?
-    frame_id: "local_origin"  # TF frame_id
+    frame_id: "map"  # TF frame_id
     child_frame_id: "fcu_utm" # TF child_frame_id
 
 # imu_pub
@@ -61,10 +61,10 @@ imu:
 
 # local_position
 local_position:
-  frame_id: "local_origin"
+  frame_id: "map"
   tf:
     send: true
-    frame_id: "local_origin"
+    frame_id: "map"
     child_frame_id: "fcu"
     send_fcu: false
 
@@ -88,7 +88,7 @@ setpoint_attitude:
   reverse_throttle: false   # allow reversed throttle
   tf:
     listen: false           # enable tf listener (disable topic subscribers)
-    frame_id: "local_origin"
+    frame_id: "map"
     child_frame_id: "attitude"
     rate_limit: 10.0
 
@@ -96,7 +96,7 @@ setpoint_attitude:
 setpoint_position:
   tf:
     listen: false           # enable tf listener (disable topic subscribers)
-    frame_id: "local_origin"
+    frame_id: "map"
     child_frame_id: "setpoint"
     rate_limit: 50.0
 
