@@ -30,9 +30,8 @@ class RepubMav():
                     rospy.loginfo("found topic %s to translate", topic)
                     found = True
                     break
-                else:
-                    rospy.loginfo("topics not found, yet")
-                    rospy.sleep(0.5)
+            if not found:
+                rospy.loginfo("topics not found, yet")
 
         self.sub = rospy.Subscriber('/run_localization/camera_pose', Odometry, self.repub, queue_size=1)
         rospy.loginfo("subscriber to found topic created")
