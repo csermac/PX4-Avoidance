@@ -6,7 +6,7 @@
     <arg name="start_pos_y" default="1.5" />
     <arg name="start_pos_z" default="1.0" />
     <arg name="world_file_name"    default="outdoor_village" />
-    <arg name="frame_id"    default="local_origin" />
+    <arg name="frame_id"    default="map" />
 
 
     <!-- Global Planner -->
@@ -26,7 +26,7 @@
     <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
         <param name="resolution" value="0.2" />
         <!-- fixed map frame (set to 'map' if SLAM or localization running!) -->
-        <param name="frame_id" type="string" value="map" />
+        <param name="frame_id" type="string" value="$(arg frame_id)" />
         <!-- maximum range to integrate (speedup!) -->
         <param name="sensor_model/max_range" value="9.0" />
         <param name="sensor_model/min" value="0.01" />
