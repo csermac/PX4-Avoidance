@@ -32,6 +32,7 @@ class RepubMav():
                     break
             if not found:
                 rospy.loginfo("topics not found, yet")
+            rospy.Rate(0.1).sleep()
 
         self.sub = rospy.Subscriber('/run_localization/camera_pose', Odometry, self.repub, queue_size=1)
         rospy.loginfo("subscriber to found topic created")
