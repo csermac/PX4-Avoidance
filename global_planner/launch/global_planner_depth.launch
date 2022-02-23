@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <launch>
 
-	# either small_house or outdoor_village.  the latter is the default
-    <arg name="world_file_name"    default="outdoor_village" />
-
-    <arg name="world_path" default="/home/csermac/.gazebo/worlds/$(arg world_file_name).world"/>
+	<!-- either small_house or outdoor_village.  the latter is the default -->
+    <arg name="world_name"    default="outdoor_village" />
+    <arg name="world_path" default="/home/csermac/.gazebo/worlds/$(arg world_name).world"/>
 
     <arg name="pointcloud_topics" default="[/camera/depth/points]"/>
     <arg name="camera_frame_id" default="camera_link"/>
@@ -16,7 +15,10 @@
     <!-- Launch PX4 and mavros -->
     <include file="$(find global_planner)/launch/global_planner_sitl_mavros.launch" >
         <arg name="model" value="iris_depth_camera" />
-        <arg name="world_path" value="$(arg world_path)" />
+        <!-- <arg name="world_path" value="$(arg world_path)" /> -->
+		<!-- pass world file name so to allow launching whichever world from mavros launcher -->
+		<arg name="world_name" default="outdoor_village" />
+		<arg name="world_path" default="/home/csermac/.gazebo/worlds/$(arg world_name).world"/>
     </include>
 
 
