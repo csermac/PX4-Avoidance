@@ -2,22 +2,26 @@
 
 from __future__ import print_function
 
+from test_cmd_vel_topic_stamped import ProvaPers
+
 import threading
 
-import roslib
+
+# import roslib
 #from roslib import load_manifest('teleop_twist_keyboard')
 import rospy
 
 from std_msgs.msg import Header
 from geometry_msgs.msg import TwistStamped
 from std_msgs.msg import Empty
+# from mavros_msgs.msg import AttitudeTarget
 
 import sys
 import select
 import termios
 import tty
 
-# NOTE: for some reason,still unknown, the drone moves holding down the keys. 
+# NOTE: for some reason,still unknown, the drone moves holding down the keys.
 
 msg = """
 Reading from the keyboard  and Publishing to TwistStamped!
@@ -178,6 +182,9 @@ if __name__ == "__main__":
     settings = termios.tcgetattr(sys.stdin)
 
     rospy.init_node('teleop_twist_keyboard')
+
+    ps = ProvaPers()
+    ps.takeoff_srv_callback(Empty)
 
     speed = rospy.get_param("~speed", 0.5)
     turn = rospy.get_param("~turn", 0.5)
