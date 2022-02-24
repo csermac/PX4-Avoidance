@@ -13,7 +13,7 @@
 
     <!-- Define a static transform from a camera internal frame to the fcu for every camera used -->
     <!-- Launch PX4 and mavros -->
-    <include file="$(find global_planner)/launch/global_planner_sitl_mavros.launch" >
+    <include file="$(find global_planner)/launch/px4_sitl_mavros.launch" >
         <arg name="model" value="iris_depth_camera" />
         <!-- <arg name="world_path" value="$(arg world_path)" /> -->
 		<!-- pass world file name so to allow launching whichever world from mavros launcher -->
