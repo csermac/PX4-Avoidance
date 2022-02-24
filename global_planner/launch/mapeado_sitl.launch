@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- <arg name="world_path" default="$(find avoidance)/sim/worlds/outdoor_village_3.world" /> -->
+    <arg name="world_name"    default="outdoor_village" />
+    <arg name="world_path" default="/home/csermac/.gazebo/worlds/$(arg world_name).world"/>
+
+	<arg name="gui" default="true"/>
+    <arg name="ns" default="/"/>
+    <arg name="model" default="iris_depth_camera"/>
+    <arg name="fcu_url" default="udp://:14540@localhost:14557"/>
+    <arg name="gcs_url" default="" />   <!-- GCS link is provided by SITL -->
+    <arg name="tgt_system" default="1" />
+    <arg name="tgt_component" default="1" />
+    <arg name="vehicle" default="iris"/>
+
+    <param name="use_sim_time" value="true" />
+
+
+    <!-- Ros transformation -->
+    <node pkg="tf" type="static_transform_publisher" name="camera_link_connector"
+          args="0.1 0 0 0 0 0 base_link camera_link 10"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="odom_map_connector"
+          args="0 0 0 0 0 0 odom base_link 30"/>
+
+    <!-- Launch PX4 SITL -->
+    <include file="$(find px4)/launch/px4.launch">
+        <arg name="vehicle" value="$(arg vehicle)"/>
+    </include>
+
+    <!-- Launch MavROS -->
+    <group ns="$(arg ns)">
+        <include file="$(find mavros)/launch/node.launch">
+            <arg name="pluginlists_yaml" value="$(find mavros)/launch/px4_pluginlists.yaml" />
+            <!-- Need to change the config file to get the tf topic and get local position in terms of local origin -->
+            <arg name="config_yaml" value="$(find global_planner)/resource/px4_config.yaml" />
+            <arg name="fcu_url" value="$(arg fcu_url)" />
+            <arg name="gcs_url" value="$(arg gcs_url)" />
+            <arg name="tgt_system" value="$(arg tgt_system)" />
+            <arg name="tgt_component" value="$(arg tgt_component)" />
+        </include>
+    </group>
+
+    <!-- Launch Gazebo -->
+    <arg name="x" default="-2"/>
+    <arg name="y" default="-0.5"/>
+    <arg name="z" default="0"/>
+    <arg name="R" default="0"/>
+    <arg name="P" default="0"/>
+    <arg name="Y" default="0"/>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="world_name" value="$(arg world_path)" />
+    </include>
+
+    <!-- Spawn vehicle model -->
+    <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-sdf -database $(arg model) -model $(arg vehicle) -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y)">
+    </node>
+
+</launch>
