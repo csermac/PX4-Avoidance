@@ -37,4 +37,7 @@
 
     <node pkg="global_planner" type="repub_mavros.py" output="screen" name="republisher" respawn="true" />
 	
+    <!-- Launch rqt_reconfigure -->
+    <node pkg="rqt_reconfigure" type="rqt_reconfigure" output="screen" name="rqt_reconfigure" />
+
 </launch>

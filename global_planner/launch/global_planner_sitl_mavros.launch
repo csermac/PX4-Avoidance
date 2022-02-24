@@ -23,10 +23,6 @@
     <node pkg="tf" type="static_transform_publisher" name="odom_map_connector"
           args="0 0 0 0 0 0 odom base_link 30"/>
 
-
-    <!-- Launch rqt_reconfigure -->
-    <node pkg="rqt_reconfigure" type="rqt_reconfigure" output="screen" name="rqt_reconfigure" />
-
     <!-- Launch PX4 SITL -->
     <include file="$(find px4)/launch/px4.launch">
         <arg name="vehicle" value="$(arg vehicle)"/>
