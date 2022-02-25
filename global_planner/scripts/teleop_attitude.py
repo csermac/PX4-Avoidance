@@ -2,7 +2,7 @@
 
 from __future__ import print_function
 
-from test_cmd_vel_topic_stamped import ProvaPers
+# from test_cmd_vel_topic_stamped import ProvaPers
 
 import threading
 
@@ -183,8 +183,8 @@ if __name__ == "__main__":
 
     rospy.init_node('teleop_twist_keyboard')
 
-    ps = ProvaPers()
-    ps.takeoff_srv_callback(Empty)
+    # ps = ProvaPers()
+    # ps.takeoff_srv_callback(Empty)
 
     speed = rospy.get_param("~speed", 0.5)
     turn = rospy.get_param("~turn", 0.5)
