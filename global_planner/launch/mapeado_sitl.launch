@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <launch>
+	<!-- this launch file is a scam: if there is no home position or some other shit I do not remember -->
     <!-- <arg name="world_path" default="$(find avoidance)/sim/worlds/outdoor_village_3.world" /> -->
     <arg name="world_name"    default="outdoor_village" />
     <arg name="world_path" default="/home/csermac/.gazebo/worlds/$(arg world_name).world"/>
